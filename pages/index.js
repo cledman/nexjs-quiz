@@ -1,14 +1,13 @@
-import styled, { withTheme } from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import db from '../db.json';
 import Widget from '../src/components/Widget';
+import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
 /*
 export const BackgroundImage = styled.div`
   background-image: url(${db.bg});
@@ -31,28 +30,49 @@ export const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+
   return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
+        <QuizLogo />
         <Widget>
           <Widget.Header>
             <h1>titulo 1</h1>
           </Widget.Header>
           <Widget.Content>
-            <p>lopema sad0asdoasdosa-=</p>
+            <form onSubmit={function (event) {
+              event.preventDefault();
+              router.push(`/quiz?name=${name}`);
+              // console.log('teste');
+            }}
+            >
+              <input
+                onChange={function (event) {
+                  console.log(event.target.value);
+                  setName(event.target.value);
+                }}
+                placeholder="Preencha seu nome"
+              />
+              <button type="submit" disabled={name.length === 0}>
+                Jogar
+                {name}
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
         <Widget>
           <Widget.Header>
             <h1>Quizes da galera</h1>
           </Widget.Header>
-          <Widget.Content>          
+          <Widget.Content>
             <p>lopema sad0asdoasdosa-=</p>
-          </Widget.Content>  
-        </Widget>        
+          </Widget.Content>
+        </Widget>
         <Footer />
       </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/cledman"/>
+      <GitHubCorner projectUrl="https://github.com/cledman" />
     </QuizBackground>
 
   );

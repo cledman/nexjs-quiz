@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+
 const Widget = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => {
-    return theme.colors.mainBg;
-  }};
+  background-color: ${({ theme }) => theme.colors.mainBg};
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 24px;
@@ -33,7 +32,6 @@ Widget.Header = styled.header`
     margin: 0;
   }
 `;
-
 
 Widget.Content = styled.div`
   padding: 24px 32px 32px 32px;
