@@ -7,6 +7,8 @@ import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 /*
 export const BackgroundImage = styled.div`
@@ -17,7 +19,7 @@ export const BackgroundImage = styled.div`
 `;
 */
 
-export const QuizContainer = styled.div`
+const QuizContainer = styled.div`
   max-width: 350px;
   margin: auto 10%;
   padding-top: 45px;
@@ -42,23 +44,21 @@ export default function Home() {
             <h1>titulo 1</h1>
           </Widget.Header>
           <Widget.Content>
-            <form onSubmit={function (event) {
+            <form onSubmit={(event) => {
               event.preventDefault();
               router.push(`/quiz?name=${name}`);
               // console.log('teste');
             }}
             >
-              <input
-                onChange={function (event) {
-                  console.log(event.target.value);
-                  setName(event.target.value);
-                }}
+              <Input
+                name="nomeDoUsuario"
+                onChange={(event) => { setName(event.target.value); }}
                 placeholder="Preencha seu nome"
+                value={name}
               />
-              <button type="submit" disabled={name.length === 0}>
-                Jogar
-                {name}
-              </button>
+              <Button type="submit" disabled={name.length === 0}>
+                {`Jogar ${name}`}
+              </Button>
             </form>
           </Widget.Content>
         </Widget>
